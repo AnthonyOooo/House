@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ru"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Любовь и свидания 💘</title>
+<style>
+*{box-sizing:border-box;margin:0;-webkit-tap-highlight-color:transparent}
+html,body{min-height:100%;font-family:-apple-system,"Segoe UI",Roboto,sans-serif;color:#fff}
+body{background:linear-gradient(#2d1245,#6a2468 55%,#b23f6c) fixed}
+.fl{position:fixed;bottom:-40px;font-size:22px;opacity:.5;animation:up linear infinite;pointer-events:none}
+@keyframes up{to{transform:translateY(-115vh) rotate(25deg)}}
+#v{max-width:480px;margin:0 auto;padding:max(16px,env(safe-area-inset-top)) 16px 40px;display:flex;flex-direction:column;gap:13px;min-height:100vh;justify-content:center;position:relative;z-index:1;animation:in .45s}
+@keyframes in{from{opacity:0;transform:translateY(16px)}}
+h1{font-size:clamp(27px,7.6vw,36px);line-height:1.15}h2{font-size:clamp(20px,5.4vw,25px);line-height:1.25}
+p{line-height:1.5}.c{text-align:center}.sm{font-size:13px;opacity:.8}
+.top{display:flex;justify-content:space-between;align-items:center;font-size:14px;font-weight:600}
+.chip{background:rgba(255,255,255,.2);border-radius:20px;padding:6px 12px}
+.bar{height:7px;border-radius:4px;background:rgba(255,255,255,.2);overflow:hidden}.bar i{display:block;height:100%;background:linear-gradient(90deg,#ffd27f,#ff8aa5);transition:.4s}
+.opts{display:grid;gap:9px}
+.opt{display:flex;gap:10px;align-items:center;text-align:left;border:2px solid rgba(255,255,255,.25);background:rgba(255,255,255,.12);backdrop-filter:blur(8px);color:#fff;font:inherit;font-size:15.5px;padding:13px;border-radius:15px;cursor:pointer;transition:.2s}
+.opt b{flex:none;width:28px;height:28px;border-radius:50%;background:rgba(255,255,255,.2);display:grid;place-items:center;font-size:13px}
+.opt.sel{background:#fff;color:#7a2260;border-color:#fff;transform:scale(1.02);font-weight:600}
+.btn{border:none;background:linear-gradient(135deg,#ffd27f,#ff8aa5);color:#3a1650;font:inherit;font-size:16.5px;font-weight:800;padding:14px 22px;border-radius:15px;cursor:pointer;box-shadow:0 8px 22px rgba(255,140,170,.4)}
+.btn.alt{background:rgba(255,255,255,.15);color:#fff;border:2px solid rgba(255,255,255,.4);box-shadow:none}
+.back{background:none;border:none;color:#fff9;font:inherit;font-size:15px;cursor:pointer;align-self:flex-start}
+input[type=text],textarea{width:100%;padding:14px;border-radius:14px;border:none;font:inherit;font-size:16px;color:#2a1650}
+.card{background:rgba(255,255,255,.14);backdrop-filter:blur(10px);border-radius:20px;padding:16px;line-height:1.55;border:1px solid rgba(255,255,255,.2)}
+.dc{text-align:center;padding:26px 18px;animation:pp .35s}@keyframes pp{from{transform:translateX(30px) scale(.95);opacity:0}}
+.dc .e{font-size:76px}.dc h2{margin:8px 0}
+.rate{display:grid;grid-template-columns:1fr 1fr 1fr;gap:9px}.rate .btn{padding:14px 4px;font-size:14.5px}
+.ans{font-size:14px;max-height:230px;overflow:auto;white-space:pre-wrap}
+.row{display:flex;gap:9px;flex-wrap:wrap}.row .btn{flex:1;padding:13px 8px;font-size:15px}
+.big{font-size:52px;text-align:center}
+.tag{display:inline-block;background:rgba(255,255,255,.2);border-radius:14px;padding:4px 10px;margin:3px 3px 0 0;font-size:13.5px}
+.tr{display:grid;grid-template-columns:120px 1fr 26px;gap:8px;align-items:center;font-size:14px;margin:6px 0}
+.tr div{height:10px;border-radius:5px;background:rgba(255,255,255,.2);overflow:hidden}.tr i{display:block;height:100%;background:linear-gradient(90deg,#ffd27f,#ff8aa5)}
+.pop{animation:pop .5s}@keyframes pop{from{transform:scale(.85);opacity:0}}
+</style></head><body>
+<div id="v"></div>
+<script>
+const S=[
+["Ты пришёл домой, а любимый человек очень устал. Что делаешь?",["Обнимаю и молчу, пока не станет легче|H","Накрываю ужин и убираю всё сам|A","Оставляю тёплую записку и пишу, как люблю|L","Откладываем дела и проводим вечер вдвоём|T"]],
+["Утро, любимому человеку рано вставать",["Готовлю кофе и завтрак|A","Целую и желаю удачного дня красивыми словами|L","Кладу в сумку маленький сюрприз|G","Провожаю до двери и крепко обнимаю|H"]],
+["Целый день вы не можете увидеться",["Пишу тёплые сообщения и голосовые|L","Заказываю любимую еду с доставкой|G","Звоню по видео, чтобы побыть рядом|T","Жду с объятиями у двери|H"]],
+["У любимого человека плохой день",["Слушаю и не перебиваю|T","Беру его дела на себя|A","Говорю: ты справишься, я тобой горжусь|L","Обнимаю и держу за руку|H"]],
+["Просто так, без повода",["Дарю цветы или вкусняшку|G","Планирую вечер вдвоём|T","Говорю, за что люблю|L","Делаю нежный массаж|H"]],
+["Годовщина",["Подарок с историей|G","Особое свидание|T","Письмо или открытка|L","Романтический ужин своими руками|A"]],
+["Вы вдвоём на диване. Что дальше?",["Кладу голову на колени|H","Включаю любимый фильм|T","Накрываю пледом и приношу чай|A","Шепчу что-то милое|L"]],
+["Любимый человек заболел",["Лекарства, суп и забота|A","Сижу рядом всё время|T","Приношу любимые вкусности|G","Нежность и тёплые объятия|H"]],
+["Вы помирились после ссоры. Что делаешь?",["Первым обнимаю|H","Говорю: прости, я тебя люблю|L","Извиняюсь делом: чай, помощь|A","Предлагаю провести время вместе|T"]],
+["Идеальный сюрприз для тебя",["День с планом, где мы вдвоём|T","Подарок, в котором видна внимательность|G","Признание в любви словами|L","Забота: всё за меня сделали|A"]]];
+const D=[["🍝","Готовим ужин вместе","Музыка, фартуки и смех"],["🎬","Кино дома под пледом","Попкорн и обнимашки"],["🧩","Настолки и пазл","Тихий азарт вдвоём"],["🛁","Спа-вечер дома","Маски, свечи, массаж"],["🍕","Пицца и любимый сериал","Самый уютный вечер"],["🌌","Ночь под звёздами на крыше","Плед и горячий чай"],
+["🌅","Закат у моря","Встречаем вдвоём"],["🚲","Велопрогулка","Ветер и свобода"],["🧺","Пикник","Лужайка, сыр и лимонад"],["🎡","Парк аттракционов","Визги и сладкая вата"],["🌃","Ночная прогулка по городу","Огни и разговоры"],["🛶","Сапы или лодка","Вода и тишина"],
+["🏊","Бассейн вдвоём","Плаваем наперегонки"],["🎳","Боулинг","Кто проиграет, тот целует"],["🧗","Скалодром","Страхуем друг друга"],["⛸️","Каток","Держимся за руки"],["🏖️","Море на выходные","Без планов и будильников"],["🥾","Поход с палаткой","Костёр и звёзды"],
+["🍣","Необычная кухня","Пробуем то, что не пробовали"],["☕","Кофейни города","Ищем лучший капучино"],["🎨","Мастер-класс по керамике","Лепим друг другу кружки"],["🎤","Концерт","Поём вместе в толпе"],["🖼️","Музей или выставка","Спорим об искусстве"],["📚","Книжный и кофе","Выбираем книги друг другу"],
+["🏡","Домик в лесу","Баня, камин, тишина"],["✈️","Город, где мы ещё не были","Путешествие за впечатлениями"],["🕯️","Ужин при свечах","Красиво и нежно"],["🔭","Планетарий","Космос на двоих"],["📸","Фотосессия вдвоём","Памятные кадры"],["🎁","Свидание-сюрприз","Один планирует, другой доверяет"]];
+const LN={L:"Слова",A:"Забота делом",G:"Подарки",T:"Время вместе",H:"Прикосновения"};
+const LD={L:"Тебе важно слышать тёплые слова, они согревают лучше всего. Мягкий совет: проси признаний, если их не хватает, близкий человек не всегда читает мысли.",A:"Ты чувствуешь любовь, когда о тебе заботятся делом: чай, ужин, помощь. Мягкий совет: говори спасибо вслух, это очень греет.",G:"Для тебя важна внимательность в мелочах, и не обязательно в дорогих. Мягкий совет: ценность подарка в том, что о тебе подумали.",T:"Тебе нужны совместные моменты и внимание без телефона. Мягкий совет: заранее планируйте время вдвоём, оно не появляется само.",H:"Тебе важны объятия, близость и тёплые касания. Мягкий совет: расскажи, какие именно прикосновения тебе приятнее всего."};
+const RL=['🙅 Не моё','🤔 Может','💖 Хочу!'];
+let i=0,A=[],R=[],name='',txt='';const v=document.getElementById('v');
+for(let k=0;k<12;k++){const e=document.createElement('div');e.className='fl';e.textContent=['💖','💗','✨','💘'][k%4];e.style.cssText+=`left:${k*8+Math.random()*6}vw;animation-duration:${12+Math.random()*10}s;animation-delay:${-Math.random()*18}s`;document.body.append(e)}
+function show(h){v.innerHTML=h;v.style.animation='none';v.offsetHeight;v.style.animation='';scrollTo(0,0)}
+function intro(){show(`<div class="big">💘</div><h1 class="c">Любовь и свидания</h1><p class="c">Сначала 10 ситуаций «как бы я проявил любовь прямо сейчас», потом 30 идей свиданий: выбираешь, куда бы вы сходили. В конце разбор и сравнение ответов.</p><input type="text" id="nm" placeholder="Как тебя зовут?"><button class="btn" onclick="start()">Начать 💞</button>`)}
+function start(){name=document.getElementById('nm').value.trim()||'Без имени';i=0;A=[];R=[];q()}
+function q(){const[t,o]=S[i];show(`<div class="top"><span class="chip">Прямо сейчас 💞</span><span>${i+1} / ${S.length}</span></div><div class="bar"><i style="width:${i/S.length*100}%"></i></div><h2>${t}</h2><div class="opts">${o.map((x,k)=>`<button class="opt${A[i]===k?' sel':''}" onclick="pick(${k},this)"><b>${k+1}</b><span>${x.split('|')[0]}</span></button>`).join('')}</div>${i?'<button class="back" onclick="i--;q()">← Назад</button>':''}`)}
+function pick(k,b){A[i]=k;b.classList.add('sel');setTimeout(()=>{++i<S.length?q():(i=0,dt())},250)}
+function dt(){if(i>=D.length){fin();return}const[e,t,d]=D[i];show(`<div class="top"><span class="chip">Свидания 🗓️</span><span>${i+1} / ${D.length}</span></div><div class="bar"><i style="width:${i/D.length*100}%"></i></div><p class="c sm">Сходили бы мы на такое свидание?</p><div class="card dc"><div class="e">${e}</div><h2>${t}</h2><p class="sm">${d}</p></div><div class="rate">${RL.map((x,k)=>`<button class="btn${k<2?' alt':''}" onclick="rate(${k})">${x}</button>`).join('')}</div>${i?'<button class="back" onclick="i--;dt()">← Назад</button>':''}`)}
+function rate(k){R[i]=k;i++;dt()}
+function fin(){show(`<div class="big">💌</div><h2 class="c">Последний штрих</h2><p class="c">Как бы ты проявил(а) любовь прямо сейчас, своими словами? Или напиши мечту про идеальное свидание.</p><textarea id="tx" rows="4" placeholder="Например: обнял бы и увёз на море…">${txt}</textarea><button class="btn" onclick="txt=document.getElementById('tx').value;res()">Показать результат ✨</button><button class="back" onclick="i=D.length-1;dt()">← Назад</button>`)}
+function lv(a){const s={L:0,A:0,G:0,T:0,H:0};a.forEach((k,j)=>s[S[j][1][k].split('|')[1]]++);return Object.entries(s).sort((a,b)=>b[1]-a[1])}
+const yes=r=>D.map((d,j)=>r[j]===2?j:-1).filter(j=>j>=0),tg2=l=>l.map(j=>`<span class="tag">${D[j][0]} ${D[j][1]}</span>`).join('');
+function code(){return btoa(unescape(encodeURIComponent(JSON.stringify({n:name,a:A,d:R,t:txt}))))}
+function msg(){const y=yes(R),m=R.map((x,j)=>x===1?j:-1).filter(j=>j>=0);return `Любовь и свидания 💘\n${name}: ${LN[lv(A)[0][0]]} — мой язык любви\n\nКак проявляю любовь:\n`+S.map((x,j)=>`${j+1}. ${x[1][A[j]].split('|')[0]}`).join('\n')+`\n\nХочу на свидание:\n`+y.map((j,k)=>`${k+1}. ${D[j][0]} ${D[j][1]}`).join('\n')+`\n\nМожет быть: ${m.map(j=>D[j][1]).join(', ')||'—'}\n${txt?'\nОт сердца: '+txt+'\n':''}\nКод для сравнения:\n${code()}`}
+function res(){const l=lv(A),mx=l[0][1]||1,y=yes(R),m=R.map((x,j)=>x===1?j:-1).filter(j=>j>=0);
+show(`<div class="big">💖</div><h1 class="c">${name}, твой язык любви: ${LN[l[0][0]]}</h1><div class="card"><p>${LD[l[0][0]]}</p><p style="margin-top:8px">А ещё в тебе сильна нота «${LN[l[1][0]]}», поэтому вам с партнёром будет что друг другу подарить 💗</p></div><div class="card"><b>Как ты проявляешь любовь</b>${l.map(([k,n])=>`<div class="tr"><span>${LN[k]}</span><div><i style="width:${n/mx*100}%"></i></div><span>${n}</span></div>`).join('')}<p class="sm" style="margin-top:6px">Это не диагноз, а тёплая игра: нет неправильных результатов.</p></div><div class="card"><b>Свидания, на которые ты хочешь 💖</b><div>${tg2(y)||'<span class="sm">Пока ничего не выбрано</span>'}</div><p style="margin-top:10px"><b>Может быть 🤔</b></p><div>${tg2(m)||'<span class="sm">—</span>'}</div><button class="btn alt" style="margin-top:12px;width:100%" onclick="rnd(yes(R),'rr')">🎲 Выбрать свидание на выходные</button><p id="rr" class="pop" style="margin-top:10px"></p></div>${txt?`<div class="card"><b>От сердца 💌</b><p>${txt.replace(/</g,'&lt;')}</p></div>`:''}<div class="card"><b>Твои ответы</b><div class="ans">${S.map((x,j)=>`${j+1}. ${x[1][A[j]].split('|')[0]}`).join('\n')}</div></div><div class="row"><button class="btn" onclick="cp()">📋 Скопировать</button><button class="btn alt" onclick="tg()">✈️ В Telegram</button></div><p class="c sm" id="ok"></p><div class="card"><b>Сравнить с половинкой 💞</b><p class="sm" style="margin:6px 0 10px">Вставь код партнёра из конца его сообщения.</p><textarea id="pc" rows="3" placeholder="Код партнёра"></textarea><button class="btn" style="margin-top:10px;width:100%" onclick="cmp()">Сравнить</button><div id="cr"></div></div>`)}
+function rnd(l,id){const e=document.getElementById(id);if(!l.length){e.textContent='Выбери хотя бы одно свидание 😉';return}const j=l[Math.random()*l.length|0];e.classList.remove('pop');e.offsetHeight;e.classList.add('pop');e.innerHTML=`<b>${D[j][0]} ${D[j][1]}</b><br><span class="sm">${D[j][2]}</span>`}
+function cp(){navigator.clipboard.writeText(msg()).then(()=>ok.textContent='Скопировано! Отправь половинке 💕').catch(()=>ok.textContent='Сделай скриншот и отправь 💕')}
+function tg(){open('https://t.me/share/url?url=%20&text='+encodeURIComponent(msg()))}
+function cmp(){let p;try{p=JSON.parse(decodeURIComponent(escape(atob(pc.value.trim().split(/\s/).pop()))));if(p.a.length!=S.length||p.d.length!=D.length)throw 0}catch(e){cr.innerHTML='<p style="margin-top:10px">Не получилось прочитать код. Скопируй его целиком 🙈</p>';return}
+let sc=0;D.forEach((x,j)=>sc+=1-Math.abs(R[j]-p.d[j])/2);S.forEach((x,j)=>sc+=x[1][A[j]].split('|')[1]===x[1][p.a[j]].split('|')[1]?1:.3);
+const pct=Math.round(sc/(D.length+S.length)*100),both=D.map((d,j)=>R[j]===2&&p.d[j]===2?j:-1).filter(j=>j>=0),soft=D.map((d,j)=>(R[j]===2&&p.d[j]===1)||(R[j]===1&&p.d[j]===2)?j:-1).filter(j=>j>=0),l1=lv(A)[0][0],l2=lv(p.a)[0][0];
+const tier=pct>=70?'Вы очень созвучны: свидания у вас будут как по нотам 💞':pct>=45?'У вас много общего и приятных отличий: есть куда расти и что открывать друг в друге 🌱':'Вы разные, и это интересно: так появляются самые неожиданные свидания 💗';
+const pair=l1===l2?`У вас общий язык любви: «${LN[l1]}». Вы будете понимать друг друга с полуслова.`:`У тебя «${LN[l1]}», у ${p.n} «${LN[l2]}». Старайтесь иногда говорить на языке друг друга, и любовь станет ещё заметнее.`;
+const w=[...both].sort(()=>Math.random()-.5).slice(0,4);
+cr.innerHTML=`<div class="pop" style="margin-top:14px"><div class="big">${pct}%</div><p class="c"><b>совпадение вашего сердца</b></p><p style="margin-top:8px">${tier}</p><p style="margin-top:8px">${pair}</p><p style="margin-top:12px"><b>Свидания, куда хотите оба 💖</b></p><div>${tg2(both)||'<span class="sm">Пока нет, но можно выбрать из «может»!</span>'}</div><p style="margin-top:10px"><b>Можно уговорить 😄</b></p><div>${tg2(soft)||'<span class="sm">—</span>'}</div><p style="margin-top:12px"><b>План на месяц 🗓️</b></p>${w.map((j,k)=>`<p class="sm">Неделя ${k+1}: ${D[j][0]} ${D[j][1]}</p>`).join('')||'<p class="sm">Выберите больше общих свиданий</p>'}<button class="btn" style="margin-top:12px;width:100%" onclick="rnd(${JSON.stringify(both.length?both:soft)},'rr2')">🎲 Наше свидание на выходные</button><p id="rr2" class="pop" style="margin-top:10px"></p>${p.t?`<p style="margin-top:12px"><b>От сердца: ${p.n} 💌</b></p><p class="sm">${String(p.t).replace(/</g,'&lt;')}</p>`:''}</div>`}
+intro();
+</script></body></html>
