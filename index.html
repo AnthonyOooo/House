@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="ru"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Дом нашей мечты 🏡</title>
+<style>
+*{box-sizing:border-box;margin:0;-webkit-tap-highlight-color:transparent}
+html,body{min-height:100%;font-family:-apple-system,"Segoe UI",Roboto,sans-serif;color:#fff}
+body{background:linear-gradient(#1b1f55,#43338a 45%,#a23f7c 100%) fixed}
+.st{position:fixed;width:3px;height:3px;border-radius:50%;background:#fff;animation:tw 3s ease-in-out infinite;pointer-events:none}
+@keyframes tw{50%{opacity:.15;transform:scale(1.8)}}
+#v{max-width:480px;margin:0 auto;padding:max(16px,env(safe-area-inset-top)) 16px 40px;display:flex;flex-direction:column;gap:13px;min-height:100vh;justify-content:center;position:relative;z-index:1;animation:in .45s}
+@keyframes in{from{opacity:0;transform:translateY(16px)}}
+h1{font-size:clamp(27px,7.6vw,36px);line-height:1.15}h2{font-size:clamp(20px,5.4vw,25px);line-height:1.25}
+p{line-height:1.5}.c{text-align:center}.sm{font-size:13px;opacity:.8}
+.top{display:flex;justify-content:space-between;align-items:center;font-size:14px;font-weight:600}
+.chip{background:rgba(255,255,255,.2);border-radius:20px;padding:6px 12px}
+.bar{height:7px;border-radius:4px;background:rgba(255,255,255,.2);overflow:hidden}.bar i{display:block;height:100%;background:linear-gradient(90deg,#ffd27f,#ff8aa5);transition:.4s}
+.hs{width:100%;border-radius:20px;display:block;box-shadow:0 10px 30px rgba(0,0,10,.4)}
+.sw{max-height:130px}
+.opts{display:grid;gap:9px}.g2{grid-template-columns:1fr 1fr}
+.opt{display:flex;gap:10px;align-items:center;text-align:left;border:2px solid rgba(255,255,255,.25);background:rgba(255,255,255,.12);backdrop-filter:blur(8px);color:#fff;font:inherit;font-size:15.5px;padding:13px;border-radius:15px;cursor:pointer;transition:.2s}
+.opt b{flex:none;width:28px;height:28px;border-radius:50%;background:rgba(255,255,255,.2);display:grid;place-items:center;font-size:13px}
+.opt.sel{background:#fff;color:#5a2a78;border-color:#fff;transform:scale(1.02);font-weight:600}.opt.sel b{background:#ffb3c6}
+.btn{border:none;background:linear-gradient(135deg,#ffd27f,#ff8aa5);color:#3a1650;font:inherit;font-size:16.5px;font-weight:800;padding:14px 24px;border-radius:15px;cursor:pointer;box-shadow:0 8px 22px rgba(255,140,170,.4)}
+.btn.alt{background:rgba(255,255,255,.15);color:#fff;border:2px solid rgba(255,255,255,.4);box-shadow:none}
+.back{background:none;border:none;color:#fff9;font:inherit;font-size:15px;cursor:pointer;align-self:flex-start}
+input[type=text],textarea{width:100%;padding:14px;border-radius:14px;border:none;font:inherit;font-size:16px;color:#2a1650}
+input[type=range]{width:100%;accent-color:#ff8aa5;height:32px}
+.card{background:rgba(255,255,255,.14);backdrop-filter:blur(10px);border-radius:20px;padding:16px;line-height:1.55;border:1px solid rgba(255,255,255,.2)}
+.ans{font-size:14px;max-height:240px;overflow:auto;white-space:pre-wrap}
+.row{display:flex;gap:9px;flex-wrap:wrap}.row .btn{flex:1;padding:13px 8px;font-size:15px}
+.big{font-size:52px;text-align:center}
+.li{font-size:14.5px;padding:7px 0;border-bottom:1px dashed rgba(255,255,255,.25)}.li:last-child{border:0}
+.tag{display:inline-block;background:rgba(255,255,255,.2);border-radius:14px;padding:4px 10px;margin:3px 3px 0 0;font-size:13.5px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.pop{animation:pp .5s}@keyframes pp{from{transform:scale(.8);opacity:0}}
+</style></head><body>
+<div id="v"></div>
+<script>
+const Q=[
+['c','Где стоит наш дом?',['🌆 В большом городе','🏡 В пригороде, где тихо','🌊 У моря','🌲 В лесу у гор']],
+['c','Какой у него стиль?',['Современный минимализм','Уютное дерево и камин','Классика и тёплые тона','Лофт: кирпич и высокие окна']],
+['c','Какие цвета в доме?',['☁️ Светлые и воздушные','🍂 Тёплые: бежевый, терракота','🖤 Тёмные и стильные','🌈 Яркие и весёлые']],
+['c','Кто ещё живёт с нами?',['🐱 Кот','🐶 Собака','🐾 И кот, и собака','💞 Пока только мы']],
+['c','Что рядом с домом?',['🌷 Сад и огород','🪴 Терраса с гамаком','🏊 Бассейн','🔥 Мангальная зона']],
+['m','Обязательно в доме (выбери до 5)',['Камин','Большая кухня','Ванна с видом','Кинозал','Кабинет','Спортзал','Библиотека','Гостевая','Мастерская','Игровая','Винный уголок','Веранда'],5],
+['c','Какая кухня?',['Общий остров, готовим вместе','Огромная, чтобы собирались гости','Компактная и умная','Главное, чтобы была кофемашина ☕']],
+['c','Какая спальня?',['Большая кровать и плотные шторы','Много света и растений','Маленькая, зато очень уютная','Иногда отдельные спальни 😅']],
+['s','В нашем доме должно быть…','🤫 тихо','🎉 шумно, с гостями'],
+['s','Порядок в доме…','🎨 творческий беспорядок','✨ стерильная чистота'],
+['c','Утро в доме мечты',['Кофе в тишине','Завтрак вместе','Зарядка и пробежка','Сплю до последнего 😴']],
+['c','Вечер в доме мечты',['Сериал и плед','Настолки и игры','Готовим вместе','Каждый занят своим, потом обнимашки']],
+['c','Как пахнет наш дом?',['Кофе и выпечка','Свежестью и чистотой','Свечами и деревом','Цветами']],
+['c','Пришли гости, а дома бардак. Что делаем?',['Спокойно: это же дом','Быстро вдвоём наводим порядок','Паникую и ругаю себя','Прячем всё в шкаф 🙈']],
+['c','Нужна пауза в тишине. Как скажешь об этом?',['Прямо скажу','Намекну и надеюсь, что поймут','Уйду в другую комнату','Попрошу просто обнять и помолчать']],
+['c','Поссорились перед сном',['Помиримся до сна','Лягу спать, утром поговорим','Нужно время, потом обниму','Шутка спасёт всё 😄']],
+['c','Что для тебя уют?',['Тёплый свет','Запах домашней еды','Объятия','Порядок и чистота']],
+['c','Как тебе проще всего показывать и получать любовь?',['Слова и комплименты','Помощь по дому','Сюрпризы и подарки','Прикосновения и объятия']],
+['c','Что тихо бесит, но ты промолчишь?',['Крошки на столе','Невыключенный свет','Громкий звук','Разбросанные носки']],
+['c','Как проводим праздники?',['Дома с близкими','В путешествии','С друзьями, шумно','Только мы вдвоём']],
+['c','Дети в будущем',['Мечтаю о детях','Когда-нибудь, но не скоро','Пока не знаю, давай обсудим','Нам хватит питомца 😅']],
+['c','Деньги на мечту',['Откладываем вместе на дом','Живём сегодняшним днём','Копим и путешествуем','Большой план: сбережения и ипотека']],
+['c','Выиграли миллион. Что делаем?',['Покупаем дом у моря','Кругосветное путешествие','Вкладываем и копим','Делимся с близкими, остальное поровну']],
+['c','Что хуже всего?',['Холодные ноги в кровати','Одеяло перетянули','Храп 😂','Громкое жевание']],
+['c','Какой предмет оживёт в нашем доме?',['Робот-пылесос-шеф','Кофемашина-друг','Говорящий кот','Диван-обнимашка']],
+['c','Наш дом в одном смайле',['🏡 Уют','🔥 Страсть и движ','🌿 Покой','🎉 Вечный праздник']]];
+const CAT=[[0,'Фундамент 🏡'],[5,'Комнаты 🛋️'],[10,'Привычки ☕'],[13,'Ситуации 🔥'],[16,'Про меня 💞'],[19,'Планы 🌍'],[23,'Шутки 😄']];
+const DICE=['Готовьте ужин: один шеф, другой помощник, меняйтесь по свистку 🍳','Устройте вечер без телефонов и расскажите по 3 мечты про дом 🕯️','Постройте шалаш из подушек и посмотрите в нём фильм 🛋️','Выберите комнату и за 10 минут придумайте, как сделать её уютнее ✨','Обнимайтесь 60 секунд молча, кто засмеётся — моет посуду 😄','Нарисуйте вместе план дома мечты на листе бумаги 📐','Приготовьте завтрак для любимого и подайте как в ресторане 🥐','Потанцуйте на кухне под одну любимую песню 💃'];
+const PRED=['В вашем доме всегда найдётся лишний плед и ни одной чистой кружки ☕','Через год вы будете спорить, где стоит диван, но мириться на нём 😄','У вас будет самый уютный дом, а любимое место окажется на кухне 🍳','Пылесос однажды станет членом семьи, и вы дадите ему имя 🤖','Гости будут уходить поздно, а вы будете говорить «ещё чуть-чуть» 🎉','Носки найдутся не в том месте, но любовь найдётся в нужном 💞'];
+let i=-1,A=[],name='';const v=document.getElementById('v');
+for(let k=0;k<26;k++){const e=document.createElement('div');e.className='st';e.style.cssText=`left:${Math.random()*100}vw;top:${Math.random()*70}vh;animation-delay:${-Math.random()*3}s`;document.body.append(e)}
+function show(h){v.innerHTML=h;v.style.animation='none';v.offsetHeight;v.style.animation='';scrollTo(0,0)}
+function house(a,c=''){const[l,s,p,pe,o]=a,sky=['#8fb7e8','#bfe3ff','#7fd6f0','#a8dcb0'][l]||'#cfd8ff',wall=['#fff6ea','#e9b98a','#5a5f78','#ffd866'][p]||'#fff6ea',rc=['#44505e','#a0522d','#9a3d3d','#3a3a3a'][s]||'#a0522d',flat=s===0||s===3;
+return `<svg class="hs ${c}" viewBox="0 0 220 140"><rect width="220" height="140" fill="${sky}"/><circle cx="188" cy="26" r="14" fill="#fff3b0"/>
+${l===0?'<g fill="#0003"><rect x="6" y="58" width="22" height="60"/><rect x="30" y="74" width="18" height="44"/><rect x="176" y="66" width="24" height="52"/></g>':''}${l===3?'<text x="4" y="104" font-size="34">🌲</text><text x="176" y="106" font-size="34">🌲</text><text x="30" y="100" font-size="24">🌲</text>':''}
+<rect y="112" width="220" height="28" fill="${l===2?'#f2deb0':'#7cc47a'}"/>${l===2?'<path d="M0 118q14-8 28 0t28 0 28 0 28 0 28 0 28 0 28 0 28 0v22H0z" fill="#3aa8dc" opacity=".85"/>':''}
+<rect x="70" y="64" width="80" height="50" rx="3" fill="${wall}" stroke="#0002"/>${flat?`<rect x="64" y="56" width="92" height="10" rx="2" fill="${rc}"/>`:`<polygon points="62,66 110,30 158,66" fill="${rc}"/>`}${s===1?'<rect x="132" y="36" width="8" height="18" fill="#7a4a35"/>':''}
+<rect x="100" y="86" width="18" height="28" rx="3" fill="#c0578b"/><g fill="#ffe58a" stroke="#0003"><rect x="78" y="76" width="16" height="16"/><rect x="126" y="76" width="16" height="16"/></g>
+${o===0?'<text x="8" y="132" font-size="20">🌷🌳</text>':o===1?'<text x="14" y="130" font-size="20">🪴</text>':o===2?'<ellipse cx="38" cy="127" rx="28" ry="8" fill="#4fc3f7"/>':o===3?'<text x="12" y="130" font-size="20">🔥🍖</text>':''}
+<text x="160" y="132" font-size="20">${['🐱','🐶','🐱🐶',''][pe]||''}</text></svg>`}
+function ans(j,a=A){const t=Q[j][0];return t==='c'?Q[j][2][a[j]]:t==='m'?(a[j].map(k=>Q[j][2][k]).join(', ')||'—'):a[j]+'/10'}
+function title(a){return `${['Современный','Уютный деревянный','Классический','Лофтовый'][a[1]]} дом ${['в большом городе','в пригороде','у моря','в лесу'][a[0]]}`}
+function instr(a,n){return [['Мне уютно, когда',16],['Любовь мне проще всего показывать и получать через',17],['Если мне нужна пауза, я',14],['Ссору лучше заканчивать так',15],['Тихо бесит, но промолчу',18]].map(([t,j])=>`<div class="li">${t}: <b>${Q[j][2][a[j]]}</b></div>`).join('')}
+function intro(){show(`<div class="big">🏡💫</div><h1 class="c">Дом нашей мечты</h1><p class="c">26 вопросов: соберёшь свой дом мечты, расскажешь о привычках и поймёшь друг друга лучше. Внутри шутки, мини-игры и сравнение ответов.</p><input type="text" id="nm" placeholder="Как тебя зовут?"><button class="btn" onclick="start()">Строим дом 💞</button>`)}
+function start(){name=document.getElementById('nm').value.trim()||'Без имени';i=0;A=[];q()}
+function next(){++i<Q.length?q():res()}
+function q(){const[t,x,y,z]=Q[i],c=[...CAT].reverse().find(k=>i>=k[0])[1];let b='';
+if(t==='c')b=`<div class="opts">${y.map((o,k)=>`<button class="opt${A[i]===k?' sel':''}" onclick="pick(${k},this)"><b>${k+1}</b><span>${o}</span></button>`).join('')}</div>`;
+if(t==='m'){A[i]=A[i]||[];b=`<p class="sm c" id="cnt">Выбрано: ${A[i].length} из ${z}</p><div class="opts g2">${y.map((o,k)=>`<button class="opt${A[i].includes(k)?' sel':''}" onclick="tog(${k},this)">${o}</button>`).join('')}</div><button class="btn" onclick="next()">Дальше →</button>`}
+if(t==='s'){A[i]=A[i]??5;b=`<div class="card"><div class="two sm"><span>${y}</span><span style="text-align:right">${z}</span></div><input type="range" min="0" max="10" value="${A[i]}" oninput="A[i]=+this.value;sv.textContent=this.value"><p class="c big" style="font-size:34px" id="sv">${A[i]}</p></div><button class="btn" onclick="next()">Дальше →</button>`}
+show(`<div class="top"><span class="chip">${c}</span><span>${i+1} / ${Q.length}</span></div><div class="bar"><i style="width:${i/Q.length*100}%"></i></div>${i<5||i>=5&&A[0]!==undefined?house(A.slice(0,5),'sw'):''}<h2>${x}</h2>${b}${i?'<button class="back" onclick="i--;q()">← Назад</button>':''}`)}
+function pick(k,b){A[i]=k;b.classList.add('sel');setTimeout(next,260)}
+function tog(k,b){const a=A[i],m=Q[i][3],p=a.indexOf(k);if(p>=0)a.splice(p,1);else if(a.length<m)a.push(k);else return;b.classList.toggle('sel');cnt.textContent=`Выбрано: ${a.length} из ${m}`}
+function code(){return btoa(unescape(encodeURIComponent(JSON.stringify({n:name,a:A}))))}
+function msg(){return `Дом нашей мечты 🏡\n${name}: ${title(A)}\n\nМои ответы:\n`+Q.map((x,j)=>`${j+1}. ${ans(j)}`).join('\n')+`\n\nКод для сравнения:\n${code()}`}
+function res(){show(`<div class="big">🏡✨</div><h1 class="c">${name}, твой дом мечты</h1>${house(A.slice(0,5))}<p class="c"><b>${title(A)}</b></p><div class="card"><b>Что обязательно внутри</b><div>${A[5].map(k=>`<span class="tag">${Q[5][2][k]}</span>`).join('')||'—'}</div></div><div class="card"><b>Инструкция по применению меня 😄</b>${instr(A)}</div><div class="card c"><b>Мини-игры</b><div class="row" style="margin-top:10px"><button class="btn alt" onclick="rd(DICE)">🎲 Задание на вечер</button><button class="btn alt" onclick="rd(PRED)">🔮 Предсказание</button></div><p id="rr" class="pop" style="margin-top:12px"></p></div><div class="card"><b>Твои ответы</b><div class="ans">${Q.map((x,j)=>`${j+1}. ${ans(j)}`).join('\n')}</div></div><div class="row"><button class="btn" onclick="cp()">📋 Скопировать</button><button class="btn alt" onclick="tg()">✈️ В Telegram</button></div><p class="c sm" id="ok"></p><div class="card"><b>Сравнить с половинкой 💞</b><p class="sm" style="margin:6px 0 10px">Вставь код партнёра из конца его сообщения.</p><textarea id="pc" rows="3" placeholder="Код партнёра"></textarea><button class="btn" style="margin-top:10px;width:100%" onclick="cmp()">Сравнить</button><div id="cr"></div></div>`)}
+function rd(a){const e=document.getElementById('rr');e.classList.remove('pop');e.offsetHeight;e.classList.add('pop');e.textContent=a[Math.random()*a.length|0]}
+function cp(){navigator.clipboard.writeText(msg()).then(()=>ok.textContent='Скопировано! Отправь половинке 💕').catch(()=>ok.textContent='Сделай скриншот и отправь 💕')}
+function tg(){open('https://t.me/share/url?url=%20&text='+encodeURIComponent(msg()))}
+function cmp(){let p;try{p=JSON.parse(decodeURIComponent(escape(atob(pc.value.trim().split(/\s/).pop()))));if(p.a.length!=Q.length)throw 0}catch(e){cr.innerHTML='<p style="margin-top:10px">Не получилось прочитать код. Скопируй его целиком 🙈</p>';return}
+let sc=0;const df=[];Q.forEach((x,j)=>{const t=x[0];let s;if(t==='c')s=A[j]===p.a[j]?1:0;else if(t==='s')s=1-Math.abs(A[j]-p.a[j])/10;else{const u=new Set([...A[j],...p.a[j]]).size,n=A[j].filter(k=>p.a[j].includes(k)).length;s=u?n/u:1}sc+=s;if(s<.7&&t!=='m')df.push(`<div class="li"><b>${j+1}. ${x[1]}</b><br>${name}: ${ans(j)}<br>${p.n}: ${ans(j,p.a)}</div>`)});
+const pct=Math.round(sc/Q.length*100),both=A[5].filter(k=>p.a[5].includes(k)),only=[...A[5].filter(k=>!p.a[5].includes(k)),...p.a[5].filter(k=>!A[5].includes(k))];
+const tier=pct>=70?'Вы очень близки: ваш общий дом получится тёплым и понятным 💞':pct>=45?'У вас много общего и милых отличий: из них и складывается интересный общий дом 🌱':'Вы очень разные, и это прекрасный повод узнать друг друга глубже. Главное говорить открыто 💗';
+cr.innerHTML=`<div class="pop" style="margin-top:14px"><div class="big">${pct}%</div><p class="c"><b>совпадение вашей мечты</b></p><p style="margin-top:8px">${tier}</p><div class="two" style="margin-top:12px"><div>${house(A.slice(0,5))}<p class="sm c">${name}</p></div><div>${house(p.a.slice(0,5))}<p class="sm c">${p.n}</p></div></div><p style="margin-top:12px"><b>Общее в доме 🏠</b></p><div>${both.map(k=>`<span class="tag">${Q[5][2][k]}</span>`).join('')||'<span class="sm">Пока нет, но можно придумать общее!</span>'}</div><p style="margin-top:10px"><b>Хочет только один из вас ✨</b></p><div>${only.map(k=>`<span class="tag">${Q[5][2][k]}</span>`).join('')||'<span class="sm">Полное совпадение!</span>'}</div><p style="margin-top:12px"><b>Инструкция по применению: ${p.n} 😄</b></p>${instr(p.a)}<p style="margin-top:12px"><b>Что обсудить за чаем ☕</b></p>${df.slice(0,8).join('')||'<p>Почти всё совпало!</p>'}${df.length>8?`<p class="sm">…и ещё ${df.length-8} тем</p>`:''}</div>`}
+intro();
+</script></body></html>
